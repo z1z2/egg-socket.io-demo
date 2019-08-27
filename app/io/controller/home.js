@@ -12,7 +12,7 @@ class DefaultController extends Controller {
     const message = ctx.args[0];
     const nsp = this.app.io.of('/');
     Object.keys(ctx.app.clients).forEach(client => {
-      nsp.to(client).emit('event', `Hi someone sent message: ${message}`);
+      nsp.to(client).emit('event', `Hi user-${ctx.app.clients[client]}, someone sent message: ${message}`);
     });
   }
 }
