@@ -1,8 +1,8 @@
 'use strict';
-module.exports = app => {
+module.exports = () => {
   return async (ctx, next) => {
-    app.clients[ctx.socket.id] = {};
     ctx.socket.emit('event', 'connected! ' + ctx.socket.id);
+    ctx.socket.join('room');
     await next();
   };
 };
