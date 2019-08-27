@@ -1,5 +1,9 @@
 # socket.io-demo
 
+1. 打开浏览器，开启两个 tab，访问 http://localhost:7001/public/client.html
+1. 打开两个 tab 的控制台，分别输入 `socket.emit('user', '1');` 和 `socket.emit('user', '2');`，告知服务端，自己的 userid 是 1 和 2
+1. 在其中一个 tab 输入 `socket.emit('server', 'message');`，两个 tab 都会收到 `Hi someone sent message: message`
+1. 这两条消息是 controller 在收到 message 后，根据当前存活的连接分别发送的
 
 
 ## QuickStart
