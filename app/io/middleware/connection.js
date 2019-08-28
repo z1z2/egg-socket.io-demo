@@ -1,8 +1,8 @@
 'use strict';
-module.exports = app => {
+module.exports = () => {
   return async (ctx, next) => {
     await next();
-    delete app.clients[ctx.socket.id];
+    ctx.service.io.removeClient(ctx.socket.id);
     console.log('disconnection!');
   };
 };
