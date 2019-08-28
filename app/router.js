@@ -10,5 +10,5 @@ module.exports = app => {
 
   // socket.io
   io.of('/').route('server', io.controller.home.server);
-  io.of('/').route('user', io.controller.home.user);
+  io.of('/').route('who-am-i', io.controller.home.whoAmI);
 };

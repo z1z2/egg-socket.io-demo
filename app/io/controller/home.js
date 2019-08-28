@@ -3,9 +3,8 @@
 const Controller = require('egg').Controller;
 
 class DefaultController extends Controller {
-  async user(ctx) {
-    const userId = ctx.args[0];
-    ctx.app.clients[ctx.socket.id] = userId;
+  async whoAmI(ctx) {
+    ctx.app.clients[ctx.socket.id] = ctx.args[0];
     console.log(ctx.app.clients);
   }
   async server(ctx) {
