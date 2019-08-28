@@ -9,12 +9,26 @@ class IOService extends Service {
   removeClient(id) {
     delete this.app.clients[id];
   }
-  send(type, data) {
-    const nsp = this.app.io.of('/');
-    Object.keys(this.app.clients).forEach(client => {
-      nsp.to(client).emit(type, `Hi user-${this.app.clients[client].user}, someone sent message: ${data}`);
-    });
 
+  sendAll(type, data) {
+    const nsp = this.app.io.of('/');
+    Object.keys(this.app.clients).forEach(key => {
+      nsp.to(key).emit(type, data);
+    });
+  }
+
+  sendToProject(project, type, data) {
+    const nsp = this.app.io.of('/');
+    Object.entries(this.app.clients).forEach(([ key, value ]) => {
+      if (value.project === project) nsp.to(key).emit(type, data);
+    });
+  }
+
+  sendToUser(user, type, data) {
+    const nsp = this.app.io.of('/');
+    Object.entries(this.app.clients).forEach(([ key, value ]) => {
+      if (value.user === user)nsp.to(key).emit(type, data);
+    });
   }
 }
 
